@@ -134,16 +134,6 @@
     </p>
   </div>
 
-  <div class="card">
-    <div class="count-label" id="countLabel">🎉 Counting down to the big day…</div>
-    <div class="countdown" id="countdown">
-      <div class="unit"><div class="num" id="d">0</div><div class="lab">Days</div></div>
-      <div class="unit"><div class="num" id="h">0</div><div class="lab">Hours</div></div>
-      <div class="unit"><div class="num" id="m">0</div><div class="lab">Minutes</div></div>
-      <div class="unit"><div class="num" id="s">0</div><div class="lab">Seconds</div></div>
-    </div>
-  </div>
-
   <div class="btns">
     <button class="btn-confetti" onclick="burst()">🎊 More Confetti!</button>
     <button class="btn-music" id="musicBtn" onclick="toggleMusic()">🎵 Play Music</button>
@@ -158,11 +148,6 @@
 /* ============================================================= */
 
 const FRIEND_NAME = "Best Friend";          // ← put your friend's name here
-
-// The next birthday date & time (year, month, day, hour, minute).
-// NOTE: month is 0-based → January = 0, December = 11.
-// Example below = December 25, 2026 at 00:00.
-const BIRTHDAY = new Date(2026, 11, 25, 0, 0, 0);
 
 const MESSAGE = `Another trip around the sun, and the world is so much brighter with you in it!
 Thank you for the laughs, the memories, and for simply being the wonderful person
@@ -227,26 +212,6 @@ function loop(){
 }
 loop();
 burst(180); // welcome burst on load
-
-/* ---------- Countdown ---------- */
-const dEl=document.getElementById('d'),hEl=document.getElementById('h'),
-      mEl=document.getElementById('m'),sEl=document.getElementById('s');
-function tick(){
-  const now=new Date();
-  let diff=BIRTHDAY-now;
-  if(diff<=0){
-    document.getElementById('countLabel').textContent="🥳 The day is here — let's party!";
-    document.getElementById('countdown').innerHTML='<div class="party-now">It\'s party time! 🎉🎂🎈</div>';
-    return;
-  }
-  const day=Math.floor(diff/86400000); diff%=86400000;
-  const hr=Math.floor(diff/3600000); diff%=3600000;
-  const mn=Math.floor(diff/60000); diff%=60000;
-  const sc=Math.floor(diff/1000);
-  dEl.textContent=day; hEl.textContent=String(hr).padStart(2,'0');
-  mEl.textContent=String(mn).padStart(2,'0'); sEl.textContent=String(sc).padStart(2,'0');
-}
-tick(); setInterval(tick,1000);
 
 /* ---------- Music (generated tune — no file needed) ---------- */
 let audioCtx=null, playing=false, tuneTimer=null;
